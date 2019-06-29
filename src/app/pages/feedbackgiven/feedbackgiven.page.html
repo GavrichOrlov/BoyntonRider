@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>feedbackgiven</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)"
+  [fullscreenControl]="true" [fullscreenControlOptions]="screenOptions" [streetViewControl]="false" >
+  <agm-direction *ngIf="origin" [origin]="origin" [destination]="destination" [markerOptions]="markerOptions" [renderOptions]="renderOptions">
+  </agm-direction>
+</agm-map>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        Rate your trip with 
+        <!-- {{serviceProvider.driverInfo.firstname}} {{serviceProvider.driverInfo.lastname}} -->
+      </ion-col>
+      
+    </ion-row>
+    <ion-row>
+        <ion-col text-center>
+          <div class="profile_div">
+            <ion-avatar>
+              <ion-img src="{{user.profile}}"></ion-img>
+            </ion-avatar>
+          </div>
+        </ion-col>
+    </ion-row>
+    <form [formGroup]="validations_form"  (ngSubmit)="givenfeedback(validations_form.value)"  >
+    <ion-row text-center>
+        <ion-col>
+            <ion-icon name="star" class="starstyle" (click)="starevent(1)" id="star1"></ion-icon>
+            <ion-icon name="star" class="starstyle" (click)="starevent(2)" id="star2"></ion-icon>
+            <ion-icon name="star" class="starstyle" (click)="starevent(3)" id="star3"></ion-icon>
+            <ion-icon name="star" class="starstyle" (click)="starevent(4)" id="star4"></ion-icon>
+            <ion-icon name="star" class="starstyle" (click)="starevent(5)" id="star5"></ion-icon>
+        </ion-col>
+    
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <ion-textarea textarea id="feedback_text" formControlName="feedback_text" class="article_text" type="text" placeholder="Write your comment" rows="5" style="border: solid 1px rgb(58, 55, 55);" required></ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+          <ion-button  class="submit-btn" type="submit" color="dark" style="width: 100%;"  [disabled]="!validations_form.valid">SUBMIT</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-grid>
+</ion-footer>

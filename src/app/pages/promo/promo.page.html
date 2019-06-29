@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Promo Code</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list padding-top>
+    <ion-item class="dafault_item">
+      <ion-label position="stacked">ENTER PROMO CODE HERE</ion-label>
+      <ion-input type="text"></ion-input>
+      <ion-button fill="clear" slot="end">Done</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label>Select Payment Mode</ion-label>
+      </ion-list-header>
+
+      <ion-card>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-img src="../../assets/img/stripe.png"></ion-img>
+          </ion-thumbnail>
+          <ion-label>Stripe</ion-label>
+          <ion-radio slot="end" value="biff" checked></ion-radio>
+        </ion-item>
+      </ion-card>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+<ion-footer padding>
+  <ion-button expand="block" type="submit" class="submit_button" (click)="submit()">Done</ion-button>
+</ion-footer>

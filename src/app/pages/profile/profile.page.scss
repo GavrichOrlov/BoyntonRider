@@ -1,0 +1,32 @@
+
+
+
+ion-button.button_outline{
+    --background:var( --ion-color-facebook) !important;
+      color: white !important;
+    --background-activated:var( --ion-color-facebook) !important;
+}
+ion-button.button_solid{
+    --background:var(--ion-color-google) !important;
+      color: white !important;
+    --background-activated:var(--ion-color-google) !important;
+
+}
+ 
+.profile_div{
+  background:url("../../../assets/img/blur.png");
+   display: flex;
+    justify-content: center;
+    height: 100px;
+}
+ion-avatar{
+  width: 75px!important;
+    height: 75px!important;
+    margin: auto!important;
+}
+ion-label{
+      margin: 11px 8px 11px 16px;
+}
+ion-list-header{
+  border-bottom: solid orange !important;
+}

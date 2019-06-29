@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Request Ride</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="map_card">
+    <ion-item>
+      <div slot="start">
+        <ion-label>
+          <ion-icon name="arrow-dropdown-circle" class="icon_drop"></ion-icon>
+          <div class="virtical_dash" slot="start"></div>
+          <ion-icon name="pin" class="icon_pin"></ion-icon>
+        </ion-label>
+      </div>
+      <ion-label>
+        <p class="horizontal_line">{{serviceProvider.showpickup}}</p>
+        <p>{{serviceProvider.showdestination}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)"
+    [fullscreenControl]="true" [fullscreenControlOptions]="screenOptions">
+    <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions">
+    </agm-direction>
+  </agm-map>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab_icon">
+    <ion-fab-button>
+      <ion-icon name="locate" style="font-size: 35px;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-card>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col size="6">
+          <ion-label class="lable_estimate">
+            <p>ESTIMATE FARE</p>
+            <p>DISTANCE</p>
+            <p>ETA</p>
+            <p>Model</p>
+          </ion-label>
+        </ion-col>
+        
+        <ion-col size="6">
+          <ion-label class="lable_estimate_right">
+            <p>$ {{serviceProvider.amount}}</p>
+            <p>{{serviceProvider.distance}}(mile)</p>
+            <p>{{(serviceProvider.distance / serviceProvider.speed * 60).toFixed(1) }}(min)</p>
+            <p>{{serviceProvider.carname}}</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row-border">
+        <ion-item routerLink="/addcard">
+          <ion-icon name="male" slot="start" expand="icon-only" no-margin class="icon-margin-right icon_color"></ion-icon>
+          <ion-button fill="clear" class="medium">Add Card</ion-button>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" type="submit" class="submit_button" (click)="alertOnSchedule()">Schedule</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" type="submit" class="submit_button" (click)="alertOnSubmit()">Ride Now</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-footer>

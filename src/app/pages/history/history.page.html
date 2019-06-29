@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-icon name="arrow-back" (click)="dismiss()" style="font-size: 25px; padding-left: 10px;"></ion-icon>
+        </ion-buttons>
+    <ion-title style="color:white;" text-center>History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <ion-card *ngFor="let item of data; let i of index" routerLink="/pickup">
+    <div padding-vertical>
+      <ion-item class="dafault_item">
+        <ion-icon name={{item.iconName}} class="icon_drop" slot="start"></ion-icon>
+        <ion-label>{{item.label}}</ion-label>
+      </ion-item>
+
+      <ion-item class="dafault_item">
+        <div class="virtical_dash" slot="start"></div>
+        <ion-thumbnail slot="end">
+          <img src="{{item.image}}">
+        </ion-thumbnail>
+      </ion-item>
+
+      <ion-item class="dafault_item">
+        <ion-icon name="{{item.iconName2}}" class="icon_pin" slot="start"></ion-icon>
+        <ion-label>{{item.label2}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-text slot="start">{{item.text}}</ion-text>
+        <ion-text slot="end">{{item.text2}}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-text slot="start">{{item.head}}</ion-text>
+        <rating slot="end" [(ngModel)]="starsCount" [max]="5" iconClass="star" fullIcon="☆" emptyIcon="★" [readonly]="false"
+          [disabled]="false" [required]="true" [float]="true" [titles]="['one', 'two', 'three', 'four', 'five']">
+        </rating>
+      </ion-item>
+    </div>
+  </ion-card> -->
+
+  <ion-card *ngFor="let ride of rides">
+    <!-- <div ion-fixed class="map">
+      <agm-map [latitude]="ride.origin.lat" [longitude]="ride.origin.lng">
+        <agm-direction
+          [origin]="ride.origin"
+          [destination]="ride.destination"
+        ></agm-direction>
+      </agm-map>
+    </div> -->
+
+    <ion-card-content class="content"
+      ><span>{{ ride.date.toDate().toUTCString() }}</span>
+      <span>$ {{ ride.fare }}</span></ion-card-content
+    >
+  </ion-card>
+</ion-content>

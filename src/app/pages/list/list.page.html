@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-icon name="arrow-back" (click)="dismiss()" style="font-size: 25px; padding-left: 10px;"></ion-icon>
+        </ion-buttons>
+    <ion-title style="color:white;" text-center>Help</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="maincontent">
+  <ion-list>
+    <ion-button *ngFor="let item of items" expand="full">
+      <span text-start>{{item.title}}</span>
+    </ion-button>
+  </ion-list>
+</ion-content>

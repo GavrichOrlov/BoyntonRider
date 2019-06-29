@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="card_pickup1" (click)="gotoEdit('pickup',true,'modal')">
+    <ion-item>
+      <ion-icon slot="start" expand="icon-only" name="search"></ion-icon>
+      <ion-label text-center>
+        <h2 class="h2_color">PIck-Up Location</h2>
+        <h3>{{serviceProvider.showpickup}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <!-- <ion-card class="card_Destination1" (click)="gotoEdit('destination',false)" *ngIf="pickup">
+    <ion-item class="mapcardItem">
+      <ion-icon slot="start" expand="icon-only" name="search"></ion-icon>
+      <ion-label text-center>
+        <h2 class="h2_color" *ngIf="serviceProvider.showdestination == ''">Destination Location</h2>
+        <h3>{{serviceProvider.showdestination}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="card_pickup2" (click)="gotoEdit('pickup',true)" *ngIf="!pickup">
+    <ion-item class="mapcardItem">
+      <ion-icon slot="start" expand="icon-only" name="search"></ion-icon>
+      <ion-label text-center>
+        <h2 class="h2_color" *ngIf="serviceProvider.showpickup == ''">PIck-Up Location</h2>
+        <h3>{{serviceProvider.showpickup}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-card> -->
+
+  <ion-card class="card_destination2" (click)="gotoEdit('destination',false,'modal')">
+    <ion-item>
+      <ion-icon slot="start" expand="icon-only" name="search"></ion-icon>
+      <ion-label text-center>
+        <h2 class="h2_color">Destination Location</h2>
+        <h3>{{serviceProvider.showdestination}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <div *ngIf="searach_Item_Flag" class="search_item">
+    <ion-card>
+      <ion-searchbar class="custom_search_bar" placeholder={{location}} [(ngModel)]="searchItem" [showCancelButton]="true"
+      (ionInput)="searcOnChnage()" (ionCancel)="dismiss()" selected="true" autofocus></ion-searchbar>
+    </ion-card>
+    <ion-card *ngIf="autocompleteItems.length">
+      <ion-list style="box-shadow: 0 0px 6px transparent #fcfcfc00 !important;" class="custom_search_list">
+        <ion-item *ngFor="let item of autocompleteItems" class="item-requset-ride" tappable (click)="chooseItem(item)">
+          <ion-icon ios="ios-pin" md="md-pin" slot="start" style="margin-top:20px; font-size:1.3em"></ion-icon>
+          <ion-label>
+            <p>{{item}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)"
+    [fullscreenControl]="true" [fullscreenControlOptions]="screenOptions" [streetViewControl]="false" >
+    <agm-marker *ngFor="let data of locations; let i = index" [latitude]="data.lat" [longitude]="data.lng" [iconUrl]="data.icon">
+      <agm-info-window>
+        <strong>{{data.car_name}}</strong>
+      </agm-info-window>
+    </agm-marker>
+    <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="markerDragEnd(m, $event)"
+      [animation]="'DROP'" *ngIf="serviceProvider.marker">
+      <agm-info-window>
+        <strong>Current My Location</strong>
+      </agm-info-window>
+    </agm-marker>
+    <agm-direction *ngIf="serviceProvider.destinationlatitude && origin" [origin]="origin" [destination]="destination" [markerOptions]="markerOptions" [renderOptions]="renderOptions">
+    </agm-direction>
+  </agm-map>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab_icon">
+    <ion-fab-button (click)="getCurrentLoaction()">
+      <ion-icon name="locate" style="font-size: 35px;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <div class="car_model">
+        <ion-item *ngFor="let driver of drivers; let j = index" (click)="changeStyle(j)" (click)="openImageCtrl(driver.car_name, host_url + driver.icon, driver.id, driver.mile_price, driver.speed)">
+          <ion-label class="label_Class">
+            <!-- <div class="img_div" [ngStyle]="{'height':item[j].hw+'px','width':item[j].hw+'px', 'background':item[j].color,'margin-left':item[j].ml+'%'}"> -->
+            <div class="img_div">
+              <ion-img src="{{host_url}}{{driver.icon}}"></ion-img>
+            </div>
+            <h3 [ngStyle]="{'color':item[j].name}">{{driver.car_name}}</h3>
+            <!-- <h4>{{(driver.distance / 0.16).toFixed(0)}} (min)</h4> -->
+          </ion-label>
+          <ion-input type="text" class="hide" id="amount" [(ngModel)]="serviceProvider.amount"></ion-input>
+          <ion-input type="text" class="hide" id="distance" [(ngModel)]="serviceProvider.distance"></ion-input>
+        </ion-item>
+      </div>
+    </ion-row>
+    <ion-button shape="round" expand="full" class="request_ride" (click) = "request_ride()">REQUEST RIDE</ion-button>
+  </ion-grid>
+</ion-footer>

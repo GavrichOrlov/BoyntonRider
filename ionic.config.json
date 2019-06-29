@@ -1,0 +1,7 @@
+{
+  "name": "BoyntonRider",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
