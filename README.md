@@ -1,7 +1,7 @@
 # BoyntonRider
 Rider APP ionic 4
 
-Driver with Ionic 4 installing node module
+installing node module
 
 sudo npm install
 
